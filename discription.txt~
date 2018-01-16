@@ -1,0 +1,15 @@
+田中さんのコードの流れ
+1.Xtionから3次元点群取得 
+
+2.ダウンサンプリング(VoxcelGrid<PointXYZRGB>)
+	(チュートリアル. voxel_grid.cpp)
+
+3.注目領域抽出(PassThrough<PointXYZRGB>)
+	(チュートリアル. passthrough.cpp)
+
+4.平面検出(SACSegmentation<PointXYZRGB>)
+5.平面除去(Extractlndices<PointXYZRGB>)
+	(チュートリアル.extract_indices.cpp)
+
+6.クラスタリング(pcl::search::KdTree<PointXYZRGB>)
+(チュートリアル.kdtree_search.cpp)

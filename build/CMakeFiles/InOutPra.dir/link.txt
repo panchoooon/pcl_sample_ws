@@ -1,0 +1,1 @@
+/usr/bin/c++     -Wno-deprecated     CMakeFiles/InOutPra.dir/InOutPra.cpp.o  -o InOutPra -rdynamic 

@@ -1,0 +1,11 @@
+/home/pancho/pcl_sample_ws/build/CMakeFiles/InOutPra.dir
+/home/pancho/pcl_sample_ws/build/CMakeFiles/cloud_viewer.dir
+/home/pancho/pcl_sample_ws/build/CMakeFiles/create_window.dir
+/home/pancho/pcl_sample_ws/build/CMakeFiles/extract_indices.dir
+/home/pancho/pcl_sample_ws/build/CMakeFiles/kdtree_search.dir
+/home/pancho/pcl_sample_ws/build/CMakeFiles/openni_viewer_simple.dir
+/home/pancho/pcl_sample_ws/build/CMakeFiles/passthrough.dir
+/home/pancho/pcl_sample_ws/build/CMakeFiles/pcd_read.dir
+/home/pancho/pcl_sample_ws/build/CMakeFiles/remove_outliers.dir
+/home/pancho/pcl_sample_ws/build/CMakeFiles/statistical_removal.dir
+/home/pancho/pcl_sample_ws/build/CMakeFiles/voxel_grid.dir
