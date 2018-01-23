@@ -6,13 +6,3 @@
 
 #IncludeRegexTransform: 
 
-/home/pancho/pcl_sample_ws/create_window.c
-stdio.h
--
-stdlib.h
--
-X11/Xlib.h
--
-X11/Xutil.h
--
-

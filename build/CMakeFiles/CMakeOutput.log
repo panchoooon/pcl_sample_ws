@@ -351,3 +351,33 @@ Linking C executable cmTryCompileExec2065314904
 make[1]: ディレクトリ `/home/pancho/pcl_sample_ws/build/CMakeFiles/CMakeTmp' から出ます
 
 
+Determining if files pthread.h exist passed with the following output:
+Change Dir: /home/guest/usr/github/pcl_sample_ws/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec2726717428/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec2726717428.dir/build.make CMakeFiles/cmTryCompileExec2726717428.dir/build
+make[1]: ディレクトリ `/home/guest/usr/github/pcl_sample_ws/build/CMakeFiles/CMakeTmp' に入ります
+/usr/bin/cmake -E cmake_progress_report /home/guest/usr/github/pcl_sample_ws/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec2726717428.dir/CheckIncludeFiles.c.o
+/usr/bin/cc    -o CMakeFiles/cmTryCompileExec2726717428.dir/CheckIncludeFiles.c.o   -c /home/guest/usr/github/pcl_sample_ws/build/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+Linking C executable cmTryCompileExec2726717428
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec2726717428.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTryCompileExec2726717428.dir/CheckIncludeFiles.c.o  -o cmTryCompileExec2726717428 -rdynamic 
+make[1]: ディレクトリ `/home/guest/usr/github/pcl_sample_ws/build/CMakeFiles/CMakeTmp' から出ます
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /home/guest/usr/github/pcl_sample_ws/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec219860757/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec219860757.dir/build.make CMakeFiles/cmTryCompileExec219860757.dir/build
+make[1]: ディレクトリ `/home/guest/usr/github/pcl_sample_ws/build/CMakeFiles/CMakeTmp' に入ります
+/usr/bin/cmake -E cmake_progress_report /home/guest/usr/github/pcl_sample_ws/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec219860757.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec219860757.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-2.8/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec219860757
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec219860757.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTryCompileExec219860757.dir/CheckFunctionExists.c.o  -o cmTryCompileExec219860757 -rdynamic -lpthread 
+make[1]: ディレクトリ `/home/guest/usr/github/pcl_sample_ws/build/CMakeFiles/CMakeTmp' から出ます
+
+

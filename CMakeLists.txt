@@ -1,7 +1,23 @@
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 project(pcl_practice)
 find_package(PCL 1.2 REQUIRED)
+find_package(OpenCV REQUIRED)
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  rospy
+  std_msgs
+  sensor_msgs
+  pcl_ros
+  pcl_conversions
+  image_transport
+  cv_bridge
+  opencv_apps
+)
+
+include_directories(${catkin_INCLUDE_DIRS})
 include_directories(${PCL_INCLUDE_DIRS})
+include_directories(${OpenCV_INCLUDE_DIRS})
+
 link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 
@@ -51,11 +67,14 @@ target_link_libraries (extract_indices ${PCL_LIBRARIES})
 
 #for my_clustering.cpp
 add_executable(my_clustering my_clustering.cpp)
+target_link_libraries(my_clustering ${catkin_LIBRARIES})
 target_link_libraries (my_clustering ${PCL_LIBRARIES})
+target_link_libraries(my_clustering ${OpenCV_LIBRARIES})
 
 #range_image_creation.cpp
 add_executable(range_image_creation range_image_creation.cpp)
 target_link_libraries (range_image_creation ${PCL_LIBRARIES})
 
-
-
+#for img_obj_proc.cpp  
+#add_executable(img_obj_proc img_obj_proc.cpp)
+#target_link_libraries (img_obj_proc ${PCL_LIBRARIES})

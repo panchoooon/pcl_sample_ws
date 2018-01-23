@@ -4,7 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/pancho/pcl_sample_ws/cloud_viewer.cpp" "/home/pancho/pcl_sample_ws/build/CMakeFiles/cloud_viewer.dir/cloud_viewer.cpp.o"
+  "/home/guest/usr/github/pcl_sample_ws/cloud_viewer.cpp" "/home/guest/usr/github/pcl_sample_ws/build/CMakeFiles/cloud_viewer.dir/cloud_viewer.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -15,6 +15,8 @@ SET(CMAKE_TARGET_DEFINITIONS
   "EIGEN_USE_NEW_STDVECTOR"
   "EIGEN_YES_I_KNOW_SPARSE_MODULE_IS_NOT_STABLE_YET"
   "FLANN_STATIC"
+  "ROSCONSOLE_BACKEND_LOG4CXX"
+  "ROS_PACKAGE_NAME=\"pcl_practice\""
   "qh_QHpointer"
   )
 
@@ -25,9 +27,13 @@ SET(CMAKE_TARGET_LINKED_INFO_FILES
 # The include file search paths:
 SET(CMAKE_C_TARGET_INCLUDE_PATH
   "/usr/include/vtk-5.8"
-  "/usr/include/pcl-1.7"
+  "/usr/local/include/opencv"
+  "/usr/local/include"
+  "/opt/ros/indigo/include"
   "/usr/include/eigen3"
+  "/usr/include/pcl-1.7"
   "/usr/include/ni"
+  "/usr/include/opencv"
   "/usr/include/openni2"
   )
 SET(CMAKE_CXX_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})

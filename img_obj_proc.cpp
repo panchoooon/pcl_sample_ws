@@ -1,0 +1,318 @@
+//--------------------------------------------------
+//オブジェクト検出
+//
+//author: Yutaro ISHIDA + Yuichiro TANAKA
+//date: 16/03/08 + 17/10/17
+//
+//--------------------------------------------------
+
+
+#include <ros/ros.h>
+
+#include <image_transport/image_transport.h>
+#include <cv_bridge/cv_bridge.h>
+#include <sensor_msgs/image_encodings.h>
+#include <sensor_msgs/PointCloud2.h>
+#include <sensor_msgs/point_cloud_conversion.h>
+
+#include <opencv2/opencv.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/highgui/highgui.hpp>
+
+#include <pcl/point_cloud.h>
+#include <pcl/point_types.h>
+#include <pcl_conversions/pcl_conversions.h>
+#include <pcl/io/pcd_io.h>
+#include <pcl/filters/voxel_grid.h>             // PCL(ダウンサンプリング)
+#include <pcl/filters/passthrough.h>            // PCL(パススルーフィルタ)
+#include <pcl/ModelCoefficients.h>              // PCL(平面検出)
+#include <pcl/segmentation/sac_segmentation.h>  // PCL(平面検出)
+#include <pcl/filters/extract_indices.h>        // PCL(平面除去)
+#include <pcl/kdtree/kdtree.h>                  // PCL(クラスタリング)
+#include <pcl/segmentation/extract_clusters.h>  // PCL(クラスタリング)
+
+using namespace std;
+
+
+//--------------------------------------------------
+//オブジェクト検出・認識クラス
+//--------------------------------------------------
+class ObjProc{
+private:
+    ros::NodeHandle nh_;
+
+    image_transport::ImageTransport img_t_;
+    image_transport::Subscriber img_sub_smi_cam_;
+    image_transport::Publisher img_pub_smi_obj_;
+
+    ros::Subscriber sub_smpc_cam_;  
+    ros::Publisher pub_smpc_pt_;    // パススルーフィルタ処理結果確認用
+    ros::Publisher pub_smpc_plane_; // 平面検出処理結果確認用
+    ros::Publisher pub_smpc_objs_;  // 物体検出処理結果確認用
+
+    cv::Mat rgb_cvimg_;
+
+public:
+    //--------------------------------------------------
+    //コンストラクタ
+    //--------------------------------------------------
+    ObjProc():img_t_(nh_){
+        img_sub_smi_cam_ = img_t_.subscribe("/camera/rgb/image_raw", 1, &ObjProc::subf_smi_cam, this);
+        img_pub_smi_obj_ = img_t_.advertise("/obj_proc/img/obj", 1);
+
+        sub_smpc_cam_ = nh_.subscribe("/camera/depth_registered/points", 1, &ObjProc::subf_smpc_cam, this);
+        pub_smpc_pt_ = nh_.advertise<sensor_msgs::PointCloud2>("/obj_proc/pc/pt", 1);         
+        pub_smpc_plane_ = nh_.advertise<sensor_msgs::PointCloud2>("/obj_proc/pc/plane", 1);
+        pub_smpc_objs_ = nh_.advertise<sensor_msgs::PointCloud2>("/obj_proc/pc/objs", 1);
+
+        ros::Duration(2).sleep();
+    }
+
+
+    //--------------------------------------------------
+    //デストラクタ
+    //--------------------------------------------------
+    ~ObjProc(){
+    }
+
+
+    //--------------------------------------------------
+    //カラーイメージSubscribe関数
+    //--------------------------------------------------
+    void subf_smi_cam(const sensor_msgs::ImageConstPtr& i_smi){
+        cv_bridge::CvImagePtr cv_img_ptr;
+        cv_img_ptr = cv_bridge::toCvCopy(i_smi, sensor_msgs::image_encodings::BGR8);
+        rgb_cvimg_ = cv_img_ptr->image;
+    }
+
+
+    //--------------------------------------------------
+    //ポイントクラウドSubscribe関数
+    //--------------------------------------------------
+    void subf_smpc_cam(const sensor_msgs::PointCloud2ConstPtr& i_smpc_ptr){
+        
+        // sensor_msgs::PointCloud2ConstPtr&からpcl::PointCloud<pcl::PointXYZRGB>に変換
+        pcl::PointCloud<pcl::PointXYZRGB> i_pc;
+        pcl::fromROSMsg (*i_smpc_ptr, i_pc); 
+        pcl::PointCloud<pcl::PointXYZRGB>::Ptr i_pc_ptr(new pcl::PointCloud<pcl::PointXYZRGB>(i_pc));
+
+
+        // ダウンサンプリング
+        pcl::PointCloud<pcl::PointXYZRGB>::Ptr plane_pc_ptr(new pcl::PointCloud<pcl::PointXYZRGB>);
+        // TODO
+        pcl::VoxelGrid<pcl::PointXYZRGB> sor;
+        sor.setInputCloud(i_pc_ptr);
+        sor.setLeafSize(0.01f, 0.01f, 0.01f);
+        sor.filter(*plane_pc_ptr);
+
+        // パススルーフィルタでポイントクラウドの領域を制限
+        // TODO
+
+
+        // パススルーフィルタを通したポイントクラウドをPublish
+        sensor_msgs::PointCloud2 o_smpc_pt;
+        pcl::toROSMsg(*plane_pc_ptr, o_smpc_pt);
+        o_smpc_pt.header.frame_id = "camera_depth_optical_frame";
+        pub_smpc_pt_.publish(o_smpc_pt);
+
+
+        // ポイントクラウドをコピー
+        pcl::PointCloud<pcl::PointXYZRGB>::Ptr objs_pc_ptr(new pcl::PointCloud<pcl::PointXYZRGB>);
+        pcl::copyPointCloud<pcl::PointXYZRGB, pcl::PointXYZRGB>(*plane_pc_ptr, *objs_pc_ptr);  
+
+
+        // 平面検出
+        // TODO
+
+     
+        //平面が検出されない場合
+        if(indices->indices.size() == 0){
+            ROS_INFO("[obj_proc]: There is no plane.");
+            return;
+        }
+
+
+        //平面を青色にする
+        for(size_t i = 0; i < indices->indices.size(); ++i){
+            plane_pc_ptr->points[indices->indices[i]].r = 0;
+            plane_pc_ptr->points[indices->indices[i]].g = 0;
+            plane_pc_ptr->points[indices->indices[i]].b = 255;
+        }
+        //平面を青色にしたポイントクラウドをパブリッシュ
+        sensor_msgs::PointCloud2 o_smpc_plane;
+        pcl::toROSMsg(*plane_pc_ptr, o_smpc_plane);
+        o_smpc_plane.header.frame_id = "camera_depth_optical_frame";
+        pub_smpc_plane_.publish(o_smpc_plane);
+
+
+        //平面除去
+        // TODO
+
+
+        //複数のオブジェクトが含まれたポイントクラウドをパブリッシュ
+        sensor_msgs::PointCloud2 o_smpc_objs;
+        pcl::toROSMsg(*objs_pc_ptr, o_smpc_objs);
+        o_smpc_objs.header.frame_id = "camera_depth_optical_frame";
+        pub_smpc_objs_.publish(o_smpc_objs);
+
+
+        //クラスタリング
+        pcl::search::KdTree<pcl::PointXYZRGB>::Ptr kdtree(new pcl::search::KdTree<pcl::PointXYZRGB>);
+        kdtree->setInputCloud(objs_pc_ptr);
+        std::vector<pcl::PointIndices> cluster_indices;             // クラスター情報の結果格納
+        // TODO
+
+
+        // クラスタを1塊ごとに出力
+        for(std::vector<pcl::PointIndices>::const_iterator it1 = cluster_indices.begin(); it1 != cluster_indices.end(); ++it1){
+            
+            // オブジェクトの各座標における最小、最大値を求める
+            double obj_pc_x_min = objs_pc_ptr->points[*it1->indices.begin()].x;
+            double obj_pc_x_max = objs_pc_ptr->points[*it1->indices.begin()].x;
+            double obj_pc_y_min = objs_pc_ptr->points[*it1->indices.begin()].y;
+            double obj_pc_y_max = objs_pc_ptr->points[*it1->indices.begin()].y;
+            double obj_pc_z_min = objs_pc_ptr->points[*it1->indices.begin()].z;
+            double obj_pc_z_max = objs_pc_ptr->points[*it1->indices.begin()].z;
+            for(std::vector<int>::const_iterator it2 = it1->indices.begin(); it2 != it1->indices.end(); it2++){
+                if(obj_pc_x_min > objs_pc_ptr->points[*it2].x) obj_pc_x_min = objs_pc_ptr->points[*it2].x;
+                if(obj_pc_x_max < objs_pc_ptr->points[*it2].x) obj_pc_x_max = objs_pc_ptr->points[*it2].x;
+                if(obj_pc_y_min > objs_pc_ptr->points[*it2].y) obj_pc_y_min = objs_pc_ptr->points[*it2].y;
+                if(obj_pc_y_max < objs_pc_ptr->points[*it2].y) obj_pc_y_max = objs_pc_ptr->points[*it2].y;
+                if(obj_pc_z_min > objs_pc_ptr->points[*it2].z) obj_pc_z_min = objs_pc_ptr->points[*it2].z;
+                if(obj_pc_z_max < objs_pc_ptr->points[*it2].z) obj_pc_z_max = objs_pc_ptr->points[*it2].z;            
+            }
+
+            // オブジェクトの各座標における中心座標を求める
+            double obj_pc_x_ave = (obj_pc_x_min + obj_pc_x_max) / 2.0;
+            double obj_pc_y_ave = (obj_pc_y_min + obj_pc_y_max) / 2.0;
+            double obj_pc_z_ave = (obj_pc_z_min + obj_pc_z_max) / 2.0;
+
+
+            pcl::PointCloud<pcl::PointXYZRGB>::Ptr obj_pc_ptr(new pcl::PointCloud<pcl::PointXYZRGB>(i_pc));
+
+            // オブジェクトとそれ以外の領域でポイントクラウドの色を変える
+            for(size_t i = 0; i < obj_pc_ptr->points.size(); ++i){
+                if(obj_pc_x_min < obj_pc_ptr->points[i].x &&
+                   obj_pc_x_max > obj_pc_ptr->points[i].x &&
+                   obj_pc_y_min < obj_pc_ptr->points[i].y &&
+                   obj_pc_y_max > obj_pc_ptr->points[i].y &&
+                   obj_pc_y_max < obj_pc_ptr->points[i].z &&
+                   obj_pc_z_max > obj_pc_ptr->points[i].z){
+                }
+                else{
+                    // オブジェクト以外(黒)
+                    obj_pc_ptr->points[i].r = 0;
+                    obj_pc_ptr->points[i].g = 0;
+                    obj_pc_ptr->points[i].b = 0;
+                }               
+            }
+
+
+            // オブジェクトを抽出したイメージを生成
+            sensor_msgs::PointCloud2 o_smpc_obj;
+            pcl::toROSMsg(*obj_pc_ptr, o_smpc_obj);
+            o_smpc_obj.header.frame_id = "camera_depth_optical_frame";
+            sensor_msgs::Image obj_smi;
+            pcl::toROSMsg(o_smpc_obj, obj_smi);
+
+            cv_bridge::CvImagePtr cv_img_ptr;
+            cv_img_ptr = cv_bridge::toCvCopy(obj_smi, sensor_msgs::image_encodings::BGR8);
+
+            cv::Mat obj_cvimg;
+            obj_cvimg = cv_img_ptr->image;
+            vector<cv::Point2i> points_v;
+            cv::Point2i obj_center(0, 0);
+
+
+            // オブジェクトの座標を間引きながらvector<cv::Point2i>に詰める
+            for(int y = 0; y < obj_cvimg.rows; y = y + 5){
+                for(int x = 0; x < obj_cvimg.cols; x = x + 5){
+                    if(obj_cvimg.at<cv::Vec3b>(y, x)[0] != 0 && //[0]:B [1]:G [2]:R
+                       obj_cvimg.at<cv::Vec3b>(y, x)[1] != 0 &&
+                       obj_cvimg.at<cv::Vec3b>(y, x)[2] != 0){
+                        points_v.push_back(cv::Point2i(x, y));
+                        obj_center.x += x;
+                        obj_center.y += y;
+                    }
+                }
+            }
+ 
+       
+            // オブジェクトの中心座標を算出
+            if((int)points_v.size() != 0){ // 0除算防止
+                obj_center.x = obj_center.x / (int)points_v.size();
+                obj_center.y = obj_center.y / (int)points_v.size();
+            }
+
+            
+            // オブジェクトを囲む回転有矩形を算出
+            cv::Mat points_m(points_v);
+            cv::RotatedRect rrect = cv::minAreaRect(cv::Mat(points_m).reshape(2));
+            // 回転角度を算出
+            if(rrect.angle >= -45){}
+            else{
+                rrect.angle = rrect.angle + 90;
+            }
+
+
+            // オブジェクトを中心としたイメージ回転行列を算出
+            cv::Mat matrix = cv::getRotationMatrix2D(obj_center, rrect.angle, 1);
+
+
+            //オブジェクトを抽出したイメージ、カラーイメージを回転
+            cv::Mat obj_cvimg_rot;
+            cv::warpAffine(obj_cvimg, obj_cvimg_rot, matrix, obj_cvimg.size());            
+            cv::Mat rgb_cvimg_rot;
+            cv::warpAffine(rgb_cvimg_, rgb_cvimg_rot, matrix, rgb_cvimg_.size());
+
+
+            //オブジェクトの各座標における最小、最大値
+            int obj_cvimg_y_min = obj_cvimg_rot.rows;
+            int obj_cvimg_y_max = 0;
+            int obj_cvimg_x_min = obj_cvimg_rot.cols;
+            int obj_cvimg_x_max = 0;
+            for(int y = 0; y < obj_cvimg_rot.rows; y++){
+                for(int x = 0; x < obj_cvimg_rot.cols; x++){
+                    if(obj_cvimg_rot.at<cv::Vec3b>(y, x)[0] != 0 &&
+                       obj_cvimg_rot.at<cv::Vec3b>(y, x)[1] != 0 &&
+                       obj_cvimg_rot.at<cv::Vec3b>(y, x)[2] != 0){
+                        if(obj_cvimg_y_min > y) obj_cvimg_y_min = y;
+                        if(obj_cvimg_y_max < y) obj_cvimg_y_max = y;
+                        if(obj_cvimg_x_min > x) obj_cvimg_x_min = x;
+                        if(obj_cvimg_x_max < x) obj_cvimg_x_max = x;
+                    }                
+                }
+            }
+
+
+            //学習・識別用オブジェクトイメージを生成
+            cv::Mat roi_cvimg = rgb_cvimg_rot(cv::Rect(obj_cvimg_x_min, obj_cvimg_y_min, obj_cvimg_x_max - obj_cvimg_x_min, obj_cvimg_y_max - obj_cvimg_y_min));
+
+
+            //学習・識別用オブジェクトイメージをPublish
+            cv_img_ptr->image = roi_cvimg;
+            img_pub_smi_obj_.publish(cv_img_ptr->toImageMsg());
+
+
+            cv_bridge::CvImage cv_img;
+            cv_img.image = roi_cvimg; 
+            sensor_msgs::Image roi_smimg;
+            cv_img.toImageMsg(roi_smimg);
+        }
+    }
+};
+
+/*
+//--------------------------------------------------
+//メイン関数
+//--------------------------------------------------
+int main (int argc, char** argv){
+    ros::init (argc, argv, "img_obj_proc_test");
+
+    ObjProc ObjProc;
+
+    while(ros::ok()){
+        ros::spinOnce(); 
+    }
+}
+*/
