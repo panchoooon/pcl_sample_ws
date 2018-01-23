@@ -1,0 +1,68 @@
+#include <iostream>
+#include <pcl/io/pcd_io.h>
+#include <pcl/point_types.h>
+#include <pcl_conversions/pcl_conversions.h>
+#include <pcl/filters/voxel_grid.h> //ダウンサンプリング用
+#include <pcl/filters/passthrough.h>// for パススルーフィルタ
+
+
+int
+main (int argc, char** argv)
+{
+
+    pcl::PCLPointCloud2 cloud_blob;
+    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZ>);
+
+    pcl::io::loadPCDFile ("table_scene_lms400.pcd", cloud_blob);
+
+    //pcl::PCLPointCloud2 から  PointCloud<pcl::PointXYZ>へ変換
+    pcl::fromPCLPointCloud2 (cloud_blob, *cloud);
+
+    
+    //C++の標準出力. ダウンサンプリング前の点群を表示
+    std::cerr << "PointCloud before filtering: " << cloud->width * cloud->height 
+       << " data points (" << pcl::getFieldsList (*cloud) << ").";
+
+
+    //passthrough filter用
+    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_passthroughed (new pcl::PointCloud<pcl::PointXYZ>);
+    // filterモジュールのインスタンスpassを作成
+    pcl::PassThrough<pcl::PointXYZ> pass;
+    // 処理する点群を"cloud"と指定
+    pass.setInputCloud (cloud);
+    //フィルタをかける座標を指定
+    pass.setFilterFieldName ("z");
+    //フィルタをかける範囲を指定
+    pass.setFilterLimits (0.0, 1.0);
+    //上記の設定の点群を除去したい場合は, 以下のモジュールでtrueを指定する。
+    //pass.setFilterLimitsNegative (true);
+    //上記の設定で実際にフィルタリングをする
+    pass.filter (*cloud_passthroughed);
+
+
+    
+/*
+    //cloudを処理する点群として指定
+    sor.setInputCloud (cloud);
+    //ダウンサンプリングする間隔([m]単位)を指定
+    sor.setLeafSize (0.01f, 0.01f, 0.01f);
+    //フィルタリングを実行
+    sor.filter(*cloud_downsampled);
+
+    //フィルタリング後の点群を表示
+    std::cerr << "PointCloud after down sampled: " << cloud_downsampled->width * cloud_downsampled->height 
+           << " data points (" << pcl::getFieldsList (*cloud_downsampled) << ").";
+   
+
+ //* convert from pcl/PCLPointCloud2 to pcl::PointCloud<T>
+
+    //C++の標準出力. ダウンサンプリング前の点群を表示
+    std::cerr << "PointCloud before down sampled: " << cloud->width * cloud->height 
+         << " data points (" << pcl::getFieldsList (*cloud) << ").\n";
+
+*/
+
+ return(0);
+}
+
+

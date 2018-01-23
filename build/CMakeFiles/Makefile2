@@ -228,13 +228,48 @@ clean: CMakeFiles/kdtree_search.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/my_clustering.dir
+
+# All Build rule for target.
+CMakeFiles/my_clustering.dir/all:
+	$(MAKE) -f CMakeFiles/my_clustering.dir/build.make CMakeFiles/my_clustering.dir/depend
+	$(MAKE) -f CMakeFiles/my_clustering.dir/build.make CMakeFiles/my_clustering.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  6
+	@echo "Built target my_clustering"
+.PHONY : CMakeFiles/my_clustering.dir/all
+
+# Include target in all.
+all: CMakeFiles/my_clustering.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/my_clustering.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pancho/pcl_sample_ws/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/my_clustering.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pancho/pcl_sample_ws/build/CMakeFiles 0
+.PHONY : CMakeFiles/my_clustering.dir/rule
+
+# Convenience name for target.
+my_clustering: CMakeFiles/my_clustering.dir/rule
+.PHONY : my_clustering
+
+# clean rule for target.
+CMakeFiles/my_clustering.dir/clean:
+	$(MAKE) -f CMakeFiles/my_clustering.dir/build.make CMakeFiles/my_clustering.dir/clean
+.PHONY : CMakeFiles/my_clustering.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/my_clustering.dir/clean
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/openni_viewer_simple.dir
 
 # All Build rule for target.
 CMakeFiles/openni_viewer_simple.dir/all:
 	$(MAKE) -f CMakeFiles/openni_viewer_simple.dir/build.make CMakeFiles/openni_viewer_simple.dir/depend
 	$(MAKE) -f CMakeFiles/openni_viewer_simple.dir/build.make CMakeFiles/openni_viewer_simple.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  6
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  7
 	@echo "Built target openni_viewer_simple"
 .PHONY : CMakeFiles/openni_viewer_simple.dir/all
 
@@ -269,7 +304,7 @@ clean: CMakeFiles/openni_viewer_simple.dir/clean
 CMakeFiles/passthrough.dir/all:
 	$(MAKE) -f CMakeFiles/passthrough.dir/build.make CMakeFiles/passthrough.dir/depend
 	$(MAKE) -f CMakeFiles/passthrough.dir/build.make CMakeFiles/passthrough.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  7
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  8
 	@echo "Built target passthrough"
 .PHONY : CMakeFiles/passthrough.dir/all
 
@@ -304,7 +339,7 @@ clean: CMakeFiles/passthrough.dir/clean
 CMakeFiles/pcd_read.dir/all:
 	$(MAKE) -f CMakeFiles/pcd_read.dir/build.make CMakeFiles/pcd_read.dir/depend
 	$(MAKE) -f CMakeFiles/pcd_read.dir/build.make CMakeFiles/pcd_read.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  8
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  9
 	@echo "Built target pcd_read"
 .PHONY : CMakeFiles/pcd_read.dir/all
 
@@ -333,13 +368,48 @@ clean: CMakeFiles/pcd_read.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/range_image_creation.dir
+
+# All Build rule for target.
+CMakeFiles/range_image_creation.dir/all:
+	$(MAKE) -f CMakeFiles/range_image_creation.dir/build.make CMakeFiles/range_image_creation.dir/depend
+	$(MAKE) -f CMakeFiles/range_image_creation.dir/build.make CMakeFiles/range_image_creation.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  10
+	@echo "Built target range_image_creation"
+.PHONY : CMakeFiles/range_image_creation.dir/all
+
+# Include target in all.
+all: CMakeFiles/range_image_creation.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/range_image_creation.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pancho/pcl_sample_ws/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/range_image_creation.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pancho/pcl_sample_ws/build/CMakeFiles 0
+.PHONY : CMakeFiles/range_image_creation.dir/rule
+
+# Convenience name for target.
+range_image_creation: CMakeFiles/range_image_creation.dir/rule
+.PHONY : range_image_creation
+
+# clean rule for target.
+CMakeFiles/range_image_creation.dir/clean:
+	$(MAKE) -f CMakeFiles/range_image_creation.dir/build.make CMakeFiles/range_image_creation.dir/clean
+.PHONY : CMakeFiles/range_image_creation.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/range_image_creation.dir/clean
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/remove_outliers.dir
 
 # All Build rule for target.
 CMakeFiles/remove_outliers.dir/all:
 	$(MAKE) -f CMakeFiles/remove_outliers.dir/build.make CMakeFiles/remove_outliers.dir/depend
 	$(MAKE) -f CMakeFiles/remove_outliers.dir/build.make CMakeFiles/remove_outliers.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  9
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  11
 	@echo "Built target remove_outliers"
 .PHONY : CMakeFiles/remove_outliers.dir/all
 
@@ -374,7 +444,7 @@ clean: CMakeFiles/remove_outliers.dir/clean
 CMakeFiles/statistical_removal.dir/all:
 	$(MAKE) -f CMakeFiles/statistical_removal.dir/build.make CMakeFiles/statistical_removal.dir/depend
 	$(MAKE) -f CMakeFiles/statistical_removal.dir/build.make CMakeFiles/statistical_removal.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  10
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  12
 	@echo "Built target statistical_removal"
 .PHONY : CMakeFiles/statistical_removal.dir/all
 
@@ -409,7 +479,7 @@ clean: CMakeFiles/statistical_removal.dir/clean
 CMakeFiles/voxel_grid.dir/all:
 	$(MAKE) -f CMakeFiles/voxel_grid.dir/build.make CMakeFiles/voxel_grid.dir/depend
 	$(MAKE) -f CMakeFiles/voxel_grid.dir/build.make CMakeFiles/voxel_grid.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  11
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  13
 	@echo "Built target voxel_grid"
 .PHONY : CMakeFiles/voxel_grid.dir/all
 

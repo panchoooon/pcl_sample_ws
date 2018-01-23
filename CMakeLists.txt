@@ -49,5 +49,13 @@ target_link_libraries (kdtree_search ${PCL_LIBRARIES})
 add_executable(extract_indices extract_indices.cpp)
 target_link_libraries (extract_indices ${PCL_LIBRARIES})
 
+#for my_clustering.cpp
+add_executable(my_clustering my_clustering.cpp)
+target_link_libraries (my_clustering ${PCL_LIBRARIES})
+
+#range_image_creation.cpp
+add_executable(range_image_creation range_image_creation.cpp)
+target_link_libraries (range_image_creation ${PCL_LIBRARIES})
+
 
 

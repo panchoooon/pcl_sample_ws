@@ -164,6 +164,19 @@ kdtree_search/fast:
 .PHONY : kdtree_search/fast
 
 #=============================================================================
+# Target rules for targets named my_clustering
+
+# Build rule for target.
+my_clustering: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 my_clustering
+.PHONY : my_clustering
+
+# fast build rule for target.
+my_clustering/fast:
+	$(MAKE) -f CMakeFiles/my_clustering.dir/build.make CMakeFiles/my_clustering.dir/build
+.PHONY : my_clustering/fast
+
+#=============================================================================
 # Target rules for targets named openni_viewer_simple
 
 # Build rule for target.
@@ -201,6 +214,19 @@ pcd_read: cmake_check_build_system
 pcd_read/fast:
 	$(MAKE) -f CMakeFiles/pcd_read.dir/build.make CMakeFiles/pcd_read.dir/build
 .PHONY : pcd_read/fast
+
+#=============================================================================
+# Target rules for targets named range_image_creation
+
+# Build rule for target.
+range_image_creation: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 range_image_creation
+.PHONY : range_image_creation
+
+# fast build rule for target.
+range_image_creation/fast:
+	$(MAKE) -f CMakeFiles/range_image_creation.dir/build.make CMakeFiles/range_image_creation.dir/build
+.PHONY : range_image_creation/fast
 
 #=============================================================================
 # Target rules for targets named remove_outliers
@@ -361,6 +387,30 @@ kdtree_search.cpp.s:
 	$(MAKE) -f CMakeFiles/kdtree_search.dir/build.make CMakeFiles/kdtree_search.dir/kdtree_search.cpp.s
 .PHONY : kdtree_search.cpp.s
 
+my_clustering.o: my_clustering.cpp.o
+.PHONY : my_clustering.o
+
+# target to build an object file
+my_clustering.cpp.o:
+	$(MAKE) -f CMakeFiles/my_clustering.dir/build.make CMakeFiles/my_clustering.dir/my_clustering.cpp.o
+.PHONY : my_clustering.cpp.o
+
+my_clustering.i: my_clustering.cpp.i
+.PHONY : my_clustering.i
+
+# target to preprocess a source file
+my_clustering.cpp.i:
+	$(MAKE) -f CMakeFiles/my_clustering.dir/build.make CMakeFiles/my_clustering.dir/my_clustering.cpp.i
+.PHONY : my_clustering.cpp.i
+
+my_clustering.s: my_clustering.cpp.s
+.PHONY : my_clustering.s
+
+# target to generate assembly for a file
+my_clustering.cpp.s:
+	$(MAKE) -f CMakeFiles/my_clustering.dir/build.make CMakeFiles/my_clustering.dir/my_clustering.cpp.s
+.PHONY : my_clustering.cpp.s
+
 openni_viewer_simple.o: openni_viewer_simple.cpp.o
 .PHONY : openni_viewer_simple.o
 
@@ -432,6 +482,30 @@ pcd_read.s: pcd_read.cpp.s
 pcd_read.cpp.s:
 	$(MAKE) -f CMakeFiles/pcd_read.dir/build.make CMakeFiles/pcd_read.dir/pcd_read.cpp.s
 .PHONY : pcd_read.cpp.s
+
+range_image_creation.o: range_image_creation.cpp.o
+.PHONY : range_image_creation.o
+
+# target to build an object file
+range_image_creation.cpp.o:
+	$(MAKE) -f CMakeFiles/range_image_creation.dir/build.make CMakeFiles/range_image_creation.dir/range_image_creation.cpp.o
+.PHONY : range_image_creation.cpp.o
+
+range_image_creation.i: range_image_creation.cpp.i
+.PHONY : range_image_creation.i
+
+# target to preprocess a source file
+range_image_creation.cpp.i:
+	$(MAKE) -f CMakeFiles/range_image_creation.dir/build.make CMakeFiles/range_image_creation.dir/range_image_creation.cpp.i
+.PHONY : range_image_creation.cpp.i
+
+range_image_creation.s: range_image_creation.cpp.s
+.PHONY : range_image_creation.s
+
+# target to generate assembly for a file
+range_image_creation.cpp.s:
+	$(MAKE) -f CMakeFiles/range_image_creation.dir/build.make CMakeFiles/range_image_creation.dir/range_image_creation.cpp.s
+.PHONY : range_image_creation.cpp.s
 
 remove_outliers.o: remove_outliers.cpp.o
 .PHONY : remove_outliers.o
@@ -517,9 +591,11 @@ help:
 	@echo "... edit_cache"
 	@echo "... extract_indices"
 	@echo "... kdtree_search"
+	@echo "... my_clustering"
 	@echo "... openni_viewer_simple"
 	@echo "... passthrough"
 	@echo "... pcd_read"
+	@echo "... range_image_creation"
 	@echo "... rebuild_cache"
 	@echo "... remove_outliers"
 	@echo "... statistical_removal"
@@ -539,6 +615,9 @@ help:
 	@echo "... kdtree_search.o"
 	@echo "... kdtree_search.i"
 	@echo "... kdtree_search.s"
+	@echo "... my_clustering.o"
+	@echo "... my_clustering.i"
+	@echo "... my_clustering.s"
 	@echo "... openni_viewer_simple.o"
 	@echo "... openni_viewer_simple.i"
 	@echo "... openni_viewer_simple.s"
@@ -548,6 +627,9 @@ help:
 	@echo "... pcd_read.o"
 	@echo "... pcd_read.i"
 	@echo "... pcd_read.s"
+	@echo "... range_image_creation.o"
+	@echo "... range_image_creation.i"
+	@echo "... range_image_creation.s"
 	@echo "... remove_outliers.o"
 	@echo "... remove_outliers.i"
 	@echo "... remove_outliers.s"

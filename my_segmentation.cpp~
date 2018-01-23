@@ -1,0 +1,90 @@
+#include <iostream>
+#include <pcl/ModelCoefficients.h>
+#include <pcl/io/pcd_io.h>
+#include <pcl/point_types.h>
+#include <pcl/sample_consensus/method_types.h>
+#include <pcl/sample_consensus/model_types.h>
+#include <pcl/segmentation/sac_segmentation.h>
+
+#include <pcl/visualization/cloud_viewer.h>
+
+int 
+main (int argc, char** argv){
+
+    //0. pcdファイルから点群を格納
+    pcl::PCLPointCloud2::Ptr cloud_origin (new pcl::PCLPointCloud2()); 
+    pcl::io::loadPCDFile ("table_scene_lms400_extracted.pcd", *cloud_origin);   
+
+    //PointXYZへ変換
+    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_origin2 (new pcl::PointCloud<pcl::PointXYZ>);
+    pcl::fromPCLPointCloud2(*cloud_origin, *cloud_origin2);
+
+    //for seg.segment
+    pcl::ModelCoefficients::Ptr coefficients (new pcl::ModelCoefficients);
+    pcl::PointIndices::Ptr inliers (new pcl::PointIndices);
+
+
+    // セグメンテーションの為のモジュール
+    pcl::SACSegmentation<pcl::PointXYZ> seg;
+    // Optional
+    seg.setOptimizeCoefficients (true);
+    // Mandatory
+    seg.setModelType (pcl::SACMODEL_PLANE);
+    seg.setMethodType (pcl::SAC_RANSAC); //RANSAC
+    seg.setDistanceThreshold (0.01);
+
+    //点群をセット
+    seg.setInputCloud(cloud_origin2);
+    //segmentationを行う
+    //inllier. 検出された平面の点群の番号
+    //coefficients. 平面の方程式(ax + by + cz + d)の係数.
+    seg.segment(*inliers, *coefficients);
+    
+
+    if (inliers->indices.size () == 0)
+    {
+      PCL_ERROR ("Could not estimate a planar model for the given dataset.");
+      return (-1);
+    }
+
+    
+
+    seg.segment(*inliers, *coefficients);
+  
+
+    //inlier(今回はplane)のみ出力
+    std::cerr << "Model inliers(only first 30) : " << inliers->indices.size () << std::endl;
+    for (size_t i = 0; i < 30; ++i)
+    std::cerr << inliers->indices[i] << "    " << cloud_origin2->points[inliers->indices[i]].x << " "
+                                               << cloud_origin2->points[inliers->indices[i]].y << " "
+                                               << cloud_origin2->points[inliers->indices[i]].z << std::endl;
+
+    //点群を保存
+
+    //inlier保存用
+/*    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_segment (new pcl::PointCloud<pcl::PointXYZ>);
+
+    for (size_t i = 0; i < inliers->indices.size (); ++i)
+    {
+	 std::cerr << inliers->indices[i] <<"\n" << std::endl;
+	 cloud_segment->points[i].x = cloud_origin2->points[inliers->indices[i]].x;
+         cloud_segment->points[i].y = cloud_origin2->points[inliers->indices[i]].y;
+	 cloud_segment->points[i].z = cloud_origin2->points[inliers->indices[i]].z;
+    }
+
+*/
+    //点群表示
+    pcl::visualization::CloudViewer viewer ("viewer1");
+    viewer.showCloud (cloud_origin2);
+/*    while (!viewer.wasStopped ())
+    {
+      boost::this_thread::sleep (boost::posix_time::microseconds (100));
+    }
+  */  
+    pcl::PCDWriter writer;
+   // writer.write<pcl::PointXYZ> ("my_segmentation.pcd", *cloud_segment);    
+
+
+    return(0);
+
+}
