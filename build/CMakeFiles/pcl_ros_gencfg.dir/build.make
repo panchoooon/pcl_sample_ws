@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/guest/usr/github/pcl_sample_ws
+CMAKE_SOURCE_DIR = /home/pancho/pcl_sample_ws
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/guest/usr/github/pcl_sample_ws/build
+CMAKE_BINARY_DIR = /home/pancho/pcl_sample_ws/build
 
 # Utility rule file for pcl_ros_gencfg.
 
@@ -60,6 +60,6 @@ CMakeFiles/pcl_ros_gencfg.dir/clean:
 .PHONY : CMakeFiles/pcl_ros_gencfg.dir/clean
 
 CMakeFiles/pcl_ros_gencfg.dir/depend:
-	cd /home/guest/usr/github/pcl_sample_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/guest/usr/github/pcl_sample_ws /home/guest/usr/github/pcl_sample_ws /home/guest/usr/github/pcl_sample_ws/build /home/guest/usr/github/pcl_sample_ws/build /home/guest/usr/github/pcl_sample_ws/build/CMakeFiles/pcl_ros_gencfg.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/pancho/pcl_sample_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pancho/pcl_sample_ws /home/pancho/pcl_sample_ws /home/pancho/pcl_sample_ws/build /home/pancho/pcl_sample_ws/build /home/pancho/pcl_sample_ws/build/CMakeFiles/pcl_ros_gencfg.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/pcl_ros_gencfg.dir/depend
 

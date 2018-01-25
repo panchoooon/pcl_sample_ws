@@ -1,18 +1,32 @@
-cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
+cmake_minimum_required(VERSION 2.8.3)
 project(pcl_practice)
 find_package(PCL 1.2 REQUIRED)
+#find_package(catkin REQUIRED COMPONENTS
+#  roscpp
+#  rospy
+#  std_msgs
+#  sensor_msgs
+#  pcl_ros
+#  pcl_conversions
+#  image_transport
+#  cv_bridge
+#  opencv_apps
+#)
+
+find_package(catkin REQUIRED COMPONENTS)
+find_package(roscpp)
+find_package(rospy)
+find_package(std_msgs)
+find_package(sensor_msgs)
+find_package(pcl_ros)
+find_package(pcl_conversions)
+find_package(image_transport)
+find_package(cv_bridge)
 find_package(OpenCV REQUIRED)
-find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  rospy
-  std_msgs
-  sensor_msgs
-  pcl_ros
-  pcl_conversions
-  image_transport
-  cv_bridge
-  opencv_apps
-)
+#find_package(opencv_apps)
+find_package(image_transport)
+
+
 
 include_directories(${catkin_INCLUDE_DIRS})
 include_directories(${PCL_INCLUDE_DIRS})
@@ -71,10 +85,25 @@ target_link_libraries(my_clustering ${catkin_LIBRARIES})
 target_link_libraries (my_clustering ${PCL_LIBRARIES})
 target_link_libraries(my_clustering ${OpenCV_LIBRARIES})
 
+
 #range_image_creation.cpp
-add_executable(range_image_creation range_image_creation.cpp)
-target_link_libraries (range_image_creation ${PCL_LIBRARIES})
+add_executable(range_image_creation range_image_creation.cpp) 
+target_link_libraries (range_image_creation ${PCL_LIBRARIES}) #必ずadd_exxecutableより後
+
+#range_image_visualization.cpp
+add_executable(range_image_visualization range_image_visualization.cpp) 
+target_link_libraries (range_image_visualization ${PCL_LIBRARIES}) 
 
 #for img_obj_proc.cpp  
 #add_executable(img_obj_proc img_obj_proc.cpp)
 #target_link_libraries (img_obj_proc ${PCL_LIBRARIES})
+
+#for test_include.cpp
+add_executable(test_include ./header/func.h test_include.cpp)
+
+#for my_create_rangeImage.cpp
+add_executable(my_create_rangeImage my_create_rangeImage.cpp) 
+target_link_libraries (my_create_rangeImage ${PCL_LIBRARIES}) 
+target_link_libraries(my_create_rangeImage ${OpenCV_LIBRARIES})
+
+

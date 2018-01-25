@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/guest/usr/github/pcl_sample_ws
+CMAKE_SOURCE_DIR = /home/pancho/pcl_sample_ws
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/guest/usr/github/pcl_sample_ws/build
+CMAKE_BINARY_DIR = /home/pancho/pcl_sample_ws/build
 
 # Utility rule file for clean_test_results.
 
@@ -46,7 +46,7 @@ CMAKE_BINARY_DIR = /home/guest/usr/github/pcl_sample_ws/build
 include CMakeFiles/clean_test_results.dir/progress.make
 
 CMakeFiles/clean_test_results:
-	/usr/bin/python /opt/ros/indigo/share/catkin/cmake/test/remove_test_results.py /home/guest/usr/github/pcl_sample_ws/build/test_results
+	/usr/bin/python /opt/ros/indigo/share/catkin/cmake/test/remove_test_results.py /home/pancho/pcl_sample_ws/build/test_results
 
 clean_test_results: CMakeFiles/clean_test_results
 clean_test_results: CMakeFiles/clean_test_results.dir/build.make
@@ -61,6 +61,6 @@ CMakeFiles/clean_test_results.dir/clean:
 .PHONY : CMakeFiles/clean_test_results.dir/clean
 
 CMakeFiles/clean_test_results.dir/depend:
-	cd /home/guest/usr/github/pcl_sample_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/guest/usr/github/pcl_sample_ws /home/guest/usr/github/pcl_sample_ws /home/guest/usr/github/pcl_sample_ws/build /home/guest/usr/github/pcl_sample_ws/build /home/guest/usr/github/pcl_sample_ws/build/CMakeFiles/clean_test_results.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/pancho/pcl_sample_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pancho/pcl_sample_ws /home/pancho/pcl_sample_ws /home/pancho/pcl_sample_ws/build /home/pancho/pcl_sample_ws/build /home/pancho/pcl_sample_ws/build/CMakeFiles/clean_test_results.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/clean_test_results.dir/depend
 

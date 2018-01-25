@@ -1,0 +1,22 @@
+#include "opencv/cv.h"
+#include "opencv/highgui.h"
+using namespace cv;
+int main(){
+    Mat img = Mat::zeros(500, 500, CV_8UC3); //500×500ピクセルの黒色のMat
+    
+    line(img, Point(100, 300), Point(400, 300), Scalar(255,0,0), 10, CV_AA); //(100,300)と(400,300)を結ぶ太さ10の青色直線
+    
+    rectangle(img, Point(200,200), Point(300, 300), Scalar(0,255,0), 5, 8); //左上が(200,200)で右下が(300,300)の太さ5の緑色矩形
+    rectangle(img, Point(200,350), Point(300, 450), Scalar(0,0,255), -1, CV_AA); //左上が(200,350)で右下が(300,450)の赤色塗りつぶし矩形
+    
+    circle(img, cv::Point(300, 150), 100, Scalar(0,0,255), 3, 4); //中心(300,150)で半径100の太さ3の赤色の円
+    
+    double value=20.3;
+    char value_c[256]; //次の行で使う一時的な変数
+    sprintf(value_c, "value=%f", value); //変数の値も含めた表示したい文字列をchar型変数に格納
+    putText(img, value_c, Point(20,100), FONT_HERSHEY_SIMPLEX, 2, Scalar(0,0,255), 1, CV_AA); //(20,100)の位置に大きさ2、太さ1の赤色文字で描画
+    
+    imshow("Sample",img);
+    waitKey(10000);
+    return 0;
+}

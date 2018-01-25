@@ -1,5 +1,5 @@
 /*
-pcdファイルから点群データを読み込んでkdtreeモジュールでクラスタリングする
+pcdファイルから点群データを読み込んでkdtreeモジュールでクラスタリングし、出来上がった点群データを保存
 
 流れ
 1.pcdファイルから読込
@@ -11,17 +11,9 @@ pcdファイルから点群データを読み込んでkdtreeモジュールで�
 
 */
 
-#include <ros/ros.h> //for ROS nomal function
 
-#include <image_transport/image_transport.h>
-#include <cv_bridge/cv_bridge.h>
-#include <sensor_msgs/image_encodings.h>
-#include <sensor_msgs/PointCloud2.h>
-#include <sensor_msgs/point_cloud_conversion.h>
 
-#include <opencv2/opencv.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/highgui/highgui.hpp>
+
 
 
 #include <iostream>
@@ -39,14 +31,22 @@ pcdファイルから点群データを読み込んでkdtreeモジュールで�
 //convert用
 #include <pcl/PCLPointCloud2.h>
 #include <pcl_conversions/pcl_conversions.h>
+
 #include <pcl/visualization/cloud_viewer.h> //PCL(可視化)
 
 
+#include <ros/ros.h> //for ROS nomal function
 
-//opencv用
+#include <image_transport/image_transport.h>
+#include <cv_bridge/cv_bridge.h>
+#include <sensor_msgs/image_encodings.h>
+#include <sensor_msgs/PointCloud2.h>
+#include <sensor_msgs/point_cloud_conversion.h>
+
 #include <opencv2/opencv.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
+
 
 int
 main (int argc, char** argv)
@@ -172,7 +172,7 @@ main (int argc, char** argv)
     pcl::PCDWriter writer2;
     writer2.write<pcl::PointXYZ> ("table_scene_lms400_extracted.pcd", *cloud_filtered);
 
-    //平面除去後の物体の点群を表示
+/*    //平面除去後の物体の点群を表示
     std::cerr << "After extracted plane " << cloud_filtered->width * cloud_filtered->height << " data points." << std::endl;
     pcl::visualization::CloudViewer viewer ("viewer_extracted");
     viewer.showCloud (cloud_filtered);
@@ -180,7 +180,7 @@ main (int argc, char** argv)
     {
       boost::this_thread::sleep (boost::posix_time::microseconds (100));
     }
-
+*/
 
 //6.kd-treeクラスタリング
 
@@ -199,7 +199,7 @@ main (int argc, char** argv)
 
     //std::cerr << "cluster_indice[0]" << cluster_indices[0] << "\n" << std::endl;
 
-    int j = 0;//クラスタ毎に可視化，点群データ保存，画像化/画像データ保存 を行う．
+    int j = 0;//クラスタ毎に可視化，点群データ保存，画像化/画像データ保存を行う．
     for (std::vector<pcl::PointIndices>::const_iterator it = cluster_indices.begin (); it != cluster_indices.end (); ++it)
     {
       pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_cluster (new pcl::PointCloud<pcl::PointXYZ>);
@@ -217,7 +217,7 @@ main (int argc, char** argv)
     	{
       	     boost::this_thread::sleep (boost::posix_time::microseconds (100));
     	}
- 
+ 	
 	
 	//保存
 	std::stringstream ss;
@@ -247,12 +247,12 @@ main (int argc, char** argv)
         double obj_pc_x_ave = (obj_pc_x_min + obj_pc_x_max) / 2.0;
         double obj_pc_y_ave = (obj_pc_y_min + obj_pc_y_max) / 2.0;
         double obj_pc_z_ave = (obj_pc_z_min + obj_pc_z_max) / 2.0;
-
+	
         //convert XYZ to XYZRGB for getting range image data
         pcl::PointCloud<pcl::PointXYZRGB>::Ptr obj_pc_ptr (new pcl::PointCloud<pcl::PointXYZRGB>);
-        pcl::copyPointCloud(*cloud_filtered, *obj_pc_ptr); 
+        pcl::copyPointCloud(*cloud_cluster, *obj_pc_ptr); 
         
-        
+        /*
         // オブジェクトとそれ以外の領域でポイントクラウドの色を変える
         for(size_t i = 0; i < obj_pc_ptr->points.size(); ++i){
             if(obj_pc_x_min < obj_pc_ptr->points[i].x &&
@@ -270,14 +270,23 @@ main (int argc, char** argv)
             }               
         }
 
+	//表示
+	pcl::visualization::CloudViewer viewer_clustered ("viewer_clustered");
+    	viewer_clustered.showCloud (obj_pc_ptr);
+    	while (!viewer_clustered.wasStopped ())
+    	{
+      	     boost::this_thread::sleep (boost::posix_time::microseconds (100));
+    	}
+	*/
+
         // オブジェクトを抽出したイメージを生成
-                
+        /*        
           sensor_msgs::PointCloud2 o_smpc_obj; 
           pcl::toROSMsg(*obj_pc_ptr, o_smpc_obj);//convert XYZRGB to ROSMsg
           o_smpc_obj.header.frame_id = "camera_depth_optical_frame"; //set frame_id
           sensor_msgs::Image obj_smi;
           pcl::toROSMsg(o_smpc_obj, obj_smi); //convert ros cloud to ros Image
-        
+         
           cv_bridge::CvImagePtr cv_img_ptr;//convert ros Image to Image can be handled on OpenCV
           cv_img_ptr = cv_bridge::toCvCopy(obj_smi, sensor_msgs::image_encodings::BGR8); //should be fixed right parameter
           cv::Mat obj_cvimg;//Mat.opencv Matrix
@@ -298,9 +307,11 @@ main (int argc, char** argv)
                       obj_center.y += y;
                   }
               }
-          }
-         
+          }*/
 
+	
+         
+	
         
     }
 

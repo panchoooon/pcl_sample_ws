@@ -35,10 +35,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/guest/usr/github/pcl_sample_ws
+CMAKE_SOURCE_DIR = /home/pancho/pcl_sample_ws
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/guest/usr/github/pcl_sample_ws/build
+CMAKE_BINARY_DIR = /home/pancho/pcl_sample_ws/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/openni_viewer_simple.dir/depend.make
@@ -51,17 +51,17 @@ include CMakeFiles/openni_viewer_simple.dir/flags.make
 
 CMakeFiles/openni_viewer_simple.dir/openni_viewer_simple.cpp.o: CMakeFiles/openni_viewer_simple.dir/flags.make
 CMakeFiles/openni_viewer_simple.dir/openni_viewer_simple.cpp.o: ../openni_viewer_simple.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/guest/usr/github/pcl_sample_ws/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/openni_viewer_simple.dir/openni_viewer_simple.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/openni_viewer_simple.dir/openni_viewer_simple.cpp.o -c /home/guest/usr/github/pcl_sample_ws/openni_viewer_simple.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/openni_viewer_simple.dir/openni_viewer_simple.cpp.o -c /home/pancho/pcl_sample_ws/openni_viewer_simple.cpp
 
 CMakeFiles/openni_viewer_simple.dir/openni_viewer_simple.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/openni_viewer_simple.dir/openni_viewer_simple.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/guest/usr/github/pcl_sample_ws/openni_viewer_simple.cpp > CMakeFiles/openni_viewer_simple.dir/openni_viewer_simple.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/pancho/pcl_sample_ws/openni_viewer_simple.cpp > CMakeFiles/openni_viewer_simple.dir/openni_viewer_simple.cpp.i
 
 CMakeFiles/openni_viewer_simple.dir/openni_viewer_simple.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/openni_viewer_simple.dir/openni_viewer_simple.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/guest/usr/github/pcl_sample_ws/openni_viewer_simple.cpp -o CMakeFiles/openni_viewer_simple.dir/openni_viewer_simple.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/pancho/pcl_sample_ws/openni_viewer_simple.cpp -o CMakeFiles/openni_viewer_simple.dir/openni_viewer_simple.cpp.s
 
 CMakeFiles/openni_viewer_simple.dir/openni_viewer_simple.cpp.o.requires:
 .PHONY : CMakeFiles/openni_viewer_simple.dir/openni_viewer_simple.cpp.o.requires
@@ -200,6 +200,6 @@ CMakeFiles/openni_viewer_simple.dir/clean:
 .PHONY : CMakeFiles/openni_viewer_simple.dir/clean
 
 CMakeFiles/openni_viewer_simple.dir/depend:
-	cd /home/guest/usr/github/pcl_sample_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/guest/usr/github/pcl_sample_ws /home/guest/usr/github/pcl_sample_ws /home/guest/usr/github/pcl_sample_ws/build /home/guest/usr/github/pcl_sample_ws/build /home/guest/usr/github/pcl_sample_ws/build/CMakeFiles/openni_viewer_simple.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/pancho/pcl_sample_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pancho/pcl_sample_ws /home/pancho/pcl_sample_ws /home/pancho/pcl_sample_ws/build /home/pancho/pcl_sample_ws/build /home/pancho/pcl_sample_ws/build/CMakeFiles/openni_viewer_simple.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/openni_viewer_simple.dir/depend
 

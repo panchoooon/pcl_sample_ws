@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/pancho/pcl_sample_ws/./header/func.h
+
+/home/pancho/pcl_sample_ws/test_include.cpp
+iostream
+-
+./header/func.h
+/home/pancho/pcl_sample_ws/./header/func.h
+

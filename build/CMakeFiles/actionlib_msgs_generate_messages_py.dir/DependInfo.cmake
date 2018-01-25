@@ -22,13 +22,10 @@ SET(CMAKE_TARGET_LINKED_INFO_FILES
 # The include file search paths:
 SET(CMAKE_C_TARGET_INCLUDE_PATH
   "/usr/include/vtk-5.8"
-  "/usr/local/include/opencv"
-  "/usr/local/include"
-  "/opt/ros/indigo/include"
-  "/usr/include/eigen3"
-  "/usr/include/pcl-1.7"
-  "/usr/include/ni"
   "/usr/include/opencv"
+  "/usr/include/pcl-1.7"
+  "/usr/include/eigen3"
+  "/usr/include/ni"
   "/usr/include/openni2"
   )
 SET(CMAKE_CXX_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})

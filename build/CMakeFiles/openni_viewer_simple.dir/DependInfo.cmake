@@ -4,7 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/guest/usr/github/pcl_sample_ws/openni_viewer_simple.cpp" "/home/guest/usr/github/pcl_sample_ws/build/CMakeFiles/openni_viewer_simple.dir/openni_viewer_simple.cpp.o"
+  "/home/pancho/pcl_sample_ws/openni_viewer_simple.cpp" "/home/pancho/pcl_sample_ws/build/CMakeFiles/openni_viewer_simple.dir/openni_viewer_simple.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -27,13 +27,10 @@ SET(CMAKE_TARGET_LINKED_INFO_FILES
 # The include file search paths:
 SET(CMAKE_C_TARGET_INCLUDE_PATH
   "/usr/include/vtk-5.8"
-  "/usr/local/include/opencv"
-  "/usr/local/include"
-  "/opt/ros/indigo/include"
-  "/usr/include/eigen3"
-  "/usr/include/pcl-1.7"
-  "/usr/include/ni"
   "/usr/include/opencv"
+  "/usr/include/pcl-1.7"
+  "/usr/include/eigen3"
+  "/usr/include/ni"
   "/usr/include/openni2"
   )
 SET(CMAKE_CXX_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})
