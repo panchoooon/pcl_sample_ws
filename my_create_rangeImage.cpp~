@@ -1,66 +1,100 @@
-/*#include <pcl/point_types.h>
+/*
+
+table_scene_lms400_extracted.pcdについてクラスタリングをし、
+各クラスタの格納されたpcdファイル(白黒)を2次元の画像に変換する。
+
+
+*/
+
+
+
+#include <pcl/point_types.h>
 #include <pcl/point_cloud.h>
 #include <pcl/io/pcd_io.h>
 #include <pcl/visualization/common/float_image_utils.h>
 #include <pcl/range_image/range_image.h>
-#include <opencv2/core/core.hpp>
-#include <opencv2/highgui/highgui.hpp>
+#include <pcl/visualization/cloud_viewer.h> //PCL(可視化)
+
+
+using namespace std;
+
 
 int main(int argc, char** argv)
 {
-	//my_clusteringでクラスタリングした各pcdデータを取得
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::io::loadPCDFile(argv[1], *cloud);
 
-	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_cluster (new pcl::PointCloud<pcl::PointXYZ>);
-	pcl::io::loadPCDFile("my_cloud_cluster.pcd", *cloud_cluster);
-
-	// レンジデータパラメータ
-	float angularResolution = (float) (  0.5f * (M_PI/180.0f));  //   解像度0.5度（ラジアン表記）
-	float maxAngleWidth     = (float) (360.0f * (M_PI/180.0f));  // 横の最大角度幅
-	float maxAngleHeight    = (float) (180.0f * (M_PI/180.0f));  // 縦の最大角度幅
-	Eigen::Affine3f sensorPose = (Eigen::Affine3f)Eigen::Translation3f(0.0f, 0.0f, 0.0f);  // 移動
-	pcl::RangeImage::CoordinateFrame coordinate_frame = pcl::RangeImage::CAMERA_FRAME;  // カメラ座標原点を原点とする
-	float noiseLevel=0.00;
-	float minRange = 0.0f;
-	int borderSize = 1;
-
-	// ポイントクラウドからレンジデータを生成
-	pcl::RangeImage rangeImage;
-	rangeImage.createFromPointCloud(cloud_cluster, angularResolution, maxAngleWidth, maxAngleHeight,
-		sensorPose, coordinate_frame, noiseLevel, minRange, borderSize);
+	
+	double x_min = cloud->points[0].x;
+	double x_max = cloud->points[0].x;
+	double y_min = cloud->points[0].y;
+	double y_max = cloud->points[0].y;
+	double z_min = cloud->points[0].z;
+	double z_max = cloud->points[0].z;
+	 
 	
 
-	// レンジデータの最大値と最小値を取得
-	float min_range, max_range;
-	rangeImage.getMinMaxRanges(min_range, max_range);
-	float min_max_range = max_range - min_range;
 
-	// 結果画像領域を生成
-	cv::Mat& image(rangeImage.height, rangeImage.width,CV8U);
-	unsigned char r,g,b;
-	for(int y=0; y < rangeImage.height; y++){
-		for(int x=0; x<rangeImage.width; x++){
-			pcl::PointWithRange rangePt = rangeImage.getPoint(x,y);
-			if(rangePt.range == INFINITY || rangePt.range == -INFINITY || rangePt.range == NAN){
-				// レンジが無限遠や無効なデータの場合
-				pcl::visualization::FloatImageUtils::getColorForFloat (rangePt.range, r, g, b);
-			}
-			else{
-				// レンジを0-1の範囲に正規化し、カラー値へ変換
-				float value = (rangePt.range - min_range) / min_max_range;
-				pcl::visualization::FloatImageUtils::getColorForFloat (value, r, g, b);
-			}
-			// ピクセルにカラー値を格納
-			image.at<cv::Vec3b>(y,x)[0] = b;
-			image.at<cv::Vec3b>(y,x)[1] = g;
-			image.at<cv::Vec3b>(y,x)[2] = r;
-		}
+	//各軸における最大値、最小値を求める
+	for(size_t i = 0; i < cloud->points.size(); i++){
+		if(x_min > cloud->points[i].x)	x_min = cloud->points[i].x;
+		if(x_max > cloud->points[i].x)	x_max = cloud->points[i].x;
+		if(y_min > cloud->points[i].y)	y_min = cloud->points[i].y;
+		if(y_max > cloud->points[i].y)	y_max = cloud->points[i].y;
+		if(z_min > cloud->points[i].z)	z_min = cloud->points[i].z;
+		if(z_max > cloud->points[i].z)	z_max = cloud->points[i].z;
 	}
-	// 画像を保存
-	cv::imwrite("my_rangeImage.png", image);
+
+	// オブジェクトの各座標における中心座標を求める
+
+	double x_ave = (x_min + x_max) / 2.0;
+	double y_ave = (y_min + y_max) / 2.0;
+	double z_ave = (z_min + z_max) / 2.0;
+
+	//最初に読み込んだクラスタを含む全体の点群画像をカラー点群として読み込む
+	pcl::PointCloud<pcl::PointXYZ>::Ptr tmp (new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::io::loadPCDFile("table_scene_lms400_extracted.pcd", *tmp);
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_entire (new pcl::PointCloud<pcl::PointXYZRGB>);
+	pcl::copyPointCloud(*tmp, *cloud_entire);
+
+	//クラスタをカラーに変換
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_color (new pcl::PointCloud<pcl::PointXYZRGB>);
+	pcl::copyPointCloud(*cloud, *cloud_color);
+
+	for(size_t i = 0; i < cloud_color->points.size(); i++){
+            if(x_min < cloud_entire->points[i].x &&
+               x_max > cloud_entire->points[i].x &&
+               y_min < cloud_entire->points[i].y &&
+               y_max > cloud_entire->points[i].y &&
+               y_max < cloud_entire->points[i].z &&
+               z_max > cloud_entire->points[i].z){
+            }
+            else{
+            // オブジェクト以外(緑)
+                cloud_entire->points[i].r = 0;
+                cloud_entire->points[i].g = 255;
+                cloud_entire->points[i].b = 0;
+            }               
+        }
+
+	pcl::visualization::CloudViewer viewer ("viewer_clustered");
+    viewer.showCloud (cloud_entire);
+    while (!viewer.wasStopped ())
+    {
+      	boost::this_thread::sleep (boost::posix_time::microseconds (100));
+    }
+
+	 
+
+
+
+	
+
 
 	return(0);
+	
 }
 
-*/
+
 
 
