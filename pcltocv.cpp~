@@ -1,0 +1,80 @@
+#include <iostream>
+#include <vector>
+#include <pcl/point_types.h>
+#include <pcl/io/pcd_io.h>
+#include <pcl/search/search.h>
+#include <pcl/search/kdtree.h>
+#include <pcl/visualization/cloud_viewer.h>
+#include <pcl/filters/passthrough.h>
+#include <pcl/segmentation/region_growing_rgb.h>
+
+
+#include <pcl/filters/voxel_grid.h>//ダウンサンプリング
+
+#include <pcl_conversions/pcl_conversions.h>
+
+//rosメッセージを扱うときのやつ
+#include <sensor_msgs/image_encodings.h>
+#include <sensor_msgs/PointCloud2.h>
+#include <sensor_msgs/point_cloud_conversion.h>
+
+//opencv用
+#include <opencv2/opencv.hpp>
+
+
+using namespace cv;
+
+using namespace std;
+
+int
+main(int argc,char **argv)
+{
+ 	pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud (new pcl::PointCloud<pcl::PointXYZRGB>);
+	pcl::io::loadPCDFile ("2Tshirt/0_ex1.pcd", *cloud);
+
+
+//ダウンサンプリング
+	//ダウンサンプリング後の点群を入れる
+	pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_downsampled (new pcl::PointCloud<pcl::PointXYZRGB>);
+	//ダウンサンプリングの為にVoxcelGridのオブジェクトをsorとして定義
+    pcl::VoxelGrid<pcl::PointXYZRGB> sor;
+    //cloudを処理する点群として指定
+    sor.setInputCloud (cloud_origin);
+    //ダウンサンプリングする間隔([m]単位)を指定
+    sor.setLeafSize (0.01f, 0.01f, 0.01f);
+    //フィルタリングを実行
+    sor.filter(*cloud_downsampled);
+
+
+	int height, width;
+
+	cout <<
+	
+
+
+/*
+	Mat im = imread("makibao.png",1); //カラーで読込
+
+	int height = im.rows;
+	int width = im.cols;
+
+	cout <<"height"<< height << endl;
+	cout << "width"<< width << endl;
+	
+	cout << "im.data[0]" << im.data[0] << endl;
+
+	for(int i = 0; i<height; i++)
+		for(int j = 0; j<width; j++)
+			im.at<cv::Vec3b>(i,j) = Vec3b(255,0,0);
+
+	imshow("Show image", im);		
+	waitKey(0);	
+*/
+
+
+
+
+	
+	return(0); 
+
+} 

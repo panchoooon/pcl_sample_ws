@@ -89,7 +89,7 @@ public:
     //--------------------------------------------------
     //ポイントクラウドSubscribe関数
     //--------------------------------------------------
-    void subf_smpc_cam(const sensor_msgs::PointCloud2ConstPtr& i_smpc_ptr){
+    void subf_smpc_cam(const sensor_msgs::PointCloud2ConstPtr i_smpc_ptr){
         
         // sensor_msgs::PointCloud2ConstPtr&からpcl::PointCloud<pcl::PointXYZRGB>に変換
         pcl::PointCloud<pcl::PointXYZRGB> i_pc;
@@ -302,7 +302,7 @@ public:
     }
 };
 
-/*
+
 //--------------------------------------------------
 //メイン関数
 //--------------------------------------------------
@@ -315,4 +315,4 @@ int main (int argc, char** argv){
         ros::spinOnce(); 
     }
 }
-*/
+

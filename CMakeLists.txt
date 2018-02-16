@@ -106,4 +106,25 @@ add_executable(my_create_rangeImage my_create_rangeImage.cpp)
 target_link_libraries (my_create_rangeImage ${PCL_LIBRARIES}) 
 target_link_libraries(my_create_rangeImage ${OpenCV_LIBRARIES})
 
+#for rosPcl.cpp
+#add_executable(rosPcl rosPcl.cpp)
+#target_link_libraries (rosPcl ${PCL_LIBRARIES}) 
+#target_link_libraries(rosPcl ${catkin_LIBRARIES}) 
 
+#for region_growing_rgb_segmentation.cpp
+add_executable(region_growing_rgb_segmentation region_growing_rgb_segmentation.cpp) 
+target_link_libraries (region_growing_rgb_segmentation ${PCL_LIBRARIES}) 
+
+#colorbase_segmentation.cpp
+add_executable(colorbase_segmentation colorbase_segmentation.cpp) 
+target_link_libraries (colorbase_segmentation ${PCL_LIBRARIES}) 
+
+
+#accessPoints.cpp
+add_executable(accessPoints accessPoints.cpp) 
+target_link_libraries (accessPoints ${PCL_LIBRARIES}) 
+
+#pcltocv.cpp
+add_executable(pcltocv pcltocv.cpp) 
+target_link_libraries (pcltocv ${PCL_LIBRARIES}) 
+target_link_libraries(pcltocv ${OpenCV_LIBRARIES})

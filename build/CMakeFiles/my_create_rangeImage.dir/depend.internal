@@ -242,6 +242,11 @@ CMakeFiles/my_create_rangeImage.dir/my_create_rangeImage.cpp.o
  /usr/include/pcl-1.7/pcl/conversions.h
  /usr/include/pcl-1.7/pcl/correspondence.h
  /usr/include/pcl-1.7/pcl/exceptions.h
+ /usr/include/pcl-1.7/pcl/filters/boost.h
+ /usr/include/pcl-1.7/pcl/filters/filter.h
+ /usr/include/pcl-1.7/pcl/filters/impl/filter.hpp
+ /usr/include/pcl-1.7/pcl/filters/impl/voxel_grid.hpp
+ /usr/include/pcl-1.7/pcl/filters/voxel_grid.h
  /usr/include/pcl-1.7/pcl/for_each_type.h
  /usr/include/pcl-1.7/pcl/geometry/planar_polygon.h
  /usr/include/pcl-1.7/pcl/impl/pcl_base.hpp

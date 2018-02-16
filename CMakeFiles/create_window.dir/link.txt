@@ -1,0 +1,1 @@
+/usr/bin/cc        CMakeFiles/create_window.dir/create_window.c.o  -o create_window -rdynamic -lSM -lICE -lX11 -lXext 

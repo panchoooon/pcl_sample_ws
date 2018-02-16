@@ -1,0 +1,127 @@
+#include <iostream>
+#include <vector>
+#include <pcl/point_types.h>
+#include <pcl/io/pcd_io.h>
+#include <pcl/search/search.h>
+#include <pcl/search/kdtree.h>
+#include <pcl/visualization/cloud_viewer.h>
+#include <pcl/filters/passthrough.h>
+#include <pcl/segmentation/region_growing_rgb.h>
+
+#include <pcl/filters/voxel_grid.h>//ダウンサンプリング
+
+#include <pcl_conversions/pcl_conversions.h>
+
+//rosメッセージを扱うときのやつ
+#include <sensor_msgs/image_encodings.h>
+#include <sensor_msgs/PointCloud2.h>
+#include <sensor_msgs/point_cloud_conversion.h>
+
+
+using namespace std;
+
+int
+main (int argc, char** argv)
+{
+  //pcl::search::Search <pcl::PointXYZRGB>::Ptr tree = boost::shared_ptr<pcl::search::Search<pcl::PointXYZRGB> > (new    pcl::search::KdTree<pcl::PointXYZRGB>);
+
+    //0. オリジナルの点を格納するインスタンスを定義
+    pcl::PCLPointCloud2::Ptr cloud_origin (new pcl::PCLPointCloud2()); 
+
+    //1.pcdファイルから読込
+    pcl::io::loadPCDFile (argv[1], *cloud_origin); 
+
+	string argv1 = argv[1];//保存のために argv[1]を文字列型として受け取る。
+
+    //2.ダウンサンプリングをする
+    //C++の標準出力. ダウンサンプリング前の点群を表示
+    std::cerr << "PointCloud before downsampling: " << cloud_origin->width * cloud_origin->height 
+       << " data points (" << pcl::getFieldsList (*cloud_origin) << ").\n";
+
+    //ダウンサンプリング後の点群を入れる
+    pcl::PCLPointCloud2::Ptr cloud_downsampled (new pcl::PCLPointCloud2()); 
+     
+
+    //ダウンサンプリングの為にVoxcelGridのオブジェクトをsorとして定義
+    pcl::VoxelGrid<pcl::PCLPointCloud2> sor;
+    //cloudを処理する点群として指定
+    sor.setInputCloud (cloud_origin);
+    //ダウンサンプリングする間隔([m]単位)を指定
+    sor.setLeafSize (0.01f, 0.01f, 0.01f);
+    //フィルタリングを実行
+    sor.filter(*cloud_downsampled);
+
+
+    //保存&可視化&後の処理ために変換
+    pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_filtered (new pcl::PointCloud<pcl::PointXYZRGB>);
+    pcl::fromPCLPointCloud2(*cloud_downsampled, *cloud_filtered);
+   
+    
+    std::cerr << "PointCloud after downsampling: " << cloud_filtered->width * cloud_filtered->height 
+       << " data points (" << pcl::getFieldsList (*cloud_filtered) << ").\n";
+
+    //保存
+	
+	string down_name = "downed_" + argv1;
+	
+
+    pcl::PCDWriter writer;
+    writer.write<pcl::PointXYZRGB> (down_name, *cloud_filtered);
+
+    //可視化for downsampled
+    pcl::visualization::CloudViewer viewer_down ("viewer_downsampled");
+    viewer_down.showCloud (cloud_filtered);
+    while (!viewer_down.wasStopped ())
+    {
+      boost::this_thread::sleep (boost::posix_time::microseconds (100));
+    }
+
+
+/*
+  	//color base segmentationの処理 
+  	pcl::IndicesPtr indices (new std::vector <int>);
+  	pcl::PassThrough<pcl::PointXYZRGB> pass;
+  	pass.setInputCloud (cloud_filtered);
+  	pass.setFilterFieldName ("z");//ここで設定した軸について
+  	pass.setFilterLimits (0.0, 1.0);//上で設定した軸のこの範囲で点群を削る
+  	pass.filter (*indices);
+  
+  	pcl::visualization::CloudViewer viewer_pass ("viewer_passthroughed");
+  	viewer_pass.showCloud (cloud_filtered);
+  	while (!viewer_pass.wasStopped ())
+  	{
+    	boost::this_thread::sleep (boost::posix_time::microseconds (100));
+  	}
+  
+	
+  
+  	pcl::RegionGrowingRGB<pcl::PointXYZRGB> reg;
+  	reg.setInputCloud (cloud_filtered);
+  	reg.setIndices (indices);
+  	//reg.setSearchMethod (tree); 要らないかも
+  	reg.setDistanceThreshold (50);
+  	reg.setPointColorThreshold (2);
+  	reg.setRegionColorThreshold (5);
+  	reg.setMinClusterSize (500);
+
+  	std::vector <pcl::PointIndices> clusters;
+  	reg.extract (clusters);
+
+  	pcl::PointCloud <pcl::PointXYZRGB>::Ptr colored_cloud = reg.getColoredCloud ();
+  	pcl::visualization::CloudViewer viewer ("Colored segmentation");
+  	viewer.showCloud (colored_cloud);
+  	while (!viewer.wasStopped ())
+    {
+      boost::this_thread::sleep (boost::posix_time::microseconds (100));
+	}
+
+*/
+
+//画像として点群を切り出す
+	sensor_msgs::PointCloud2 sm_cloud;
+	pcl::toROSMsg(*cloud_filtered, sm_cloud);
+
+
+	return (0);
+}
+

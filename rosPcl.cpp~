@@ -1,0 +1,25 @@
+#include <ros/ros.h>
+#include "std_msgs/String.h"
+
+#include <pcl/point_types.h>
+#include <pcl/point_cloud.h>
+#include <pcl/io/pcd_io.h>
+#include <pcl/visualization/common/float_image_utils.h>
+#include <pcl/range_image/range_image.h>
+#include <pcl/visualization/cloud_viewer.h> //PCL(可視化)
+
+int
+main (int argc, char** argv)
+{
+
+	ros::init(argc, argv, "my_pcl_tutorial");
+	ros::NodeHandle nh;
+
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZ>);
+	pcl::io::loadPCDFile(argv[1], *cloud);
+
+	
+
+	
+
+}

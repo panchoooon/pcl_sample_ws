@@ -119,6 +119,41 @@ clean: CMakeFiles/_catkin_empty_exported_target.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/accessPoints.dir
+
+# All Build rule for target.
+CMakeFiles/accessPoints.dir/all:
+	$(MAKE) -f CMakeFiles/accessPoints.dir/build.make CMakeFiles/accessPoints.dir/depend
+	$(MAKE) -f CMakeFiles/accessPoints.dir/build.make CMakeFiles/accessPoints.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  2
+	@echo "Built target accessPoints"
+.PHONY : CMakeFiles/accessPoints.dir/all
+
+# Include target in all.
+all: CMakeFiles/accessPoints.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/accessPoints.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pancho/pcl_sample_ws/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/accessPoints.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pancho/pcl_sample_ws/build/CMakeFiles 0
+.PHONY : CMakeFiles/accessPoints.dir/rule
+
+# Convenience name for target.
+accessPoints: CMakeFiles/accessPoints.dir/rule
+.PHONY : accessPoints
+
+# clean rule for target.
+CMakeFiles/accessPoints.dir/clean:
+	$(MAKE) -f CMakeFiles/accessPoints.dir/build.make CMakeFiles/accessPoints.dir/clean
+.PHONY : CMakeFiles/accessPoints.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/accessPoints.dir/clean
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/actionlib_generate_messages_cpp.dir
 
 # All Build rule for target.
@@ -435,7 +470,7 @@ clean: CMakeFiles/clean_test_results.dir/clean
 CMakeFiles/cloud_viewer.dir/all:
 	$(MAKE) -f CMakeFiles/cloud_viewer.dir/build.make CMakeFiles/cloud_viewer.dir/depend
 	$(MAKE) -f CMakeFiles/cloud_viewer.dir/build.make CMakeFiles/cloud_viewer.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  2
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  3
 	@echo "Built target cloud_viewer"
 .PHONY : CMakeFiles/cloud_viewer.dir/all
 
@@ -464,13 +499,48 @@ clean: CMakeFiles/cloud_viewer.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/colorbase_segmentation.dir
+
+# All Build rule for target.
+CMakeFiles/colorbase_segmentation.dir/all:
+	$(MAKE) -f CMakeFiles/colorbase_segmentation.dir/build.make CMakeFiles/colorbase_segmentation.dir/depend
+	$(MAKE) -f CMakeFiles/colorbase_segmentation.dir/build.make CMakeFiles/colorbase_segmentation.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  4
+	@echo "Built target colorbase_segmentation"
+.PHONY : CMakeFiles/colorbase_segmentation.dir/all
+
+# Include target in all.
+all: CMakeFiles/colorbase_segmentation.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/colorbase_segmentation.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pancho/pcl_sample_ws/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/colorbase_segmentation.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pancho/pcl_sample_ws/build/CMakeFiles 0
+.PHONY : CMakeFiles/colorbase_segmentation.dir/rule
+
+# Convenience name for target.
+colorbase_segmentation: CMakeFiles/colorbase_segmentation.dir/rule
+.PHONY : colorbase_segmentation
+
+# clean rule for target.
+CMakeFiles/colorbase_segmentation.dir/clean:
+	$(MAKE) -f CMakeFiles/colorbase_segmentation.dir/build.make CMakeFiles/colorbase_segmentation.dir/clean
+.PHONY : CMakeFiles/colorbase_segmentation.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/colorbase_segmentation.dir/clean
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/create_window.dir
 
 # All Build rule for target.
 CMakeFiles/create_window.dir/all:
 	$(MAKE) -f CMakeFiles/create_window.dir/build.make CMakeFiles/create_window.dir/depend
 	$(MAKE) -f CMakeFiles/create_window.dir/build.make CMakeFiles/create_window.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  3
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  5
 	@echo "Built target create_window"
 .PHONY : CMakeFiles/create_window.dir/all
 
@@ -691,7 +761,7 @@ clean: CMakeFiles/dynamic_reconfigure_generate_messages_py.dir/clean
 CMakeFiles/extract_indices.dir/all:
 	$(MAKE) -f CMakeFiles/extract_indices.dir/build.make CMakeFiles/extract_indices.dir/depend
 	$(MAKE) -f CMakeFiles/extract_indices.dir/build.make CMakeFiles/extract_indices.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  4
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  6
 	@echo "Built target extract_indices"
 .PHONY : CMakeFiles/extract_indices.dir/all
 
@@ -819,7 +889,7 @@ clean: CMakeFiles/geometry_msgs_generate_messages_py.dir/clean
 CMakeFiles/kdtree_search.dir/all:
 	$(MAKE) -f CMakeFiles/kdtree_search.dir/build.make CMakeFiles/kdtree_search.dir/depend
 	$(MAKE) -f CMakeFiles/kdtree_search.dir/build.make CMakeFiles/kdtree_search.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  7
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  9
 	@echo "Built target kdtree_search"
 .PHONY : CMakeFiles/kdtree_search.dir/all
 
@@ -854,7 +924,7 @@ clean: CMakeFiles/kdtree_search.dir/clean
 CMakeFiles/my_clustering.dir/all:
 	$(MAKE) -f CMakeFiles/my_clustering.dir/build.make CMakeFiles/my_clustering.dir/depend
 	$(MAKE) -f CMakeFiles/my_clustering.dir/build.make CMakeFiles/my_clustering.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  8
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  10
 	@echo "Built target my_clustering"
 .PHONY : CMakeFiles/my_clustering.dir/all
 
@@ -889,7 +959,7 @@ clean: CMakeFiles/my_clustering.dir/clean
 CMakeFiles/my_create_rangeImage.dir/all:
 	$(MAKE) -f CMakeFiles/my_create_rangeImage.dir/build.make CMakeFiles/my_create_rangeImage.dir/depend
 	$(MAKE) -f CMakeFiles/my_create_rangeImage.dir/build.make CMakeFiles/my_create_rangeImage.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  9
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  11
 	@echo "Built target my_create_rangeImage"
 .PHONY : CMakeFiles/my_create_rangeImage.dir/all
 
@@ -1017,7 +1087,7 @@ clean: CMakeFiles/nodelet_generate_messages_py.dir/clean
 CMakeFiles/openni_viewer_simple.dir/all:
 	$(MAKE) -f CMakeFiles/openni_viewer_simple.dir/build.make CMakeFiles/openni_viewer_simple.dir/depend
 	$(MAKE) -f CMakeFiles/openni_viewer_simple.dir/build.make CMakeFiles/openni_viewer_simple.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  10
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  12
 	@echo "Built target openni_viewer_simple"
 .PHONY : CMakeFiles/openni_viewer_simple.dir/all
 
@@ -1052,7 +1122,7 @@ clean: CMakeFiles/openni_viewer_simple.dir/clean
 CMakeFiles/passthrough.dir/all:
 	$(MAKE) -f CMakeFiles/passthrough.dir/build.make CMakeFiles/passthrough.dir/depend
 	$(MAKE) -f CMakeFiles/passthrough.dir/build.make CMakeFiles/passthrough.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  11
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  13
 	@echo "Built target passthrough"
 .PHONY : CMakeFiles/passthrough.dir/all
 
@@ -1087,7 +1157,7 @@ clean: CMakeFiles/passthrough.dir/clean
 CMakeFiles/pcd_read.dir/all:
 	$(MAKE) -f CMakeFiles/pcd_read.dir/build.make CMakeFiles/pcd_read.dir/depend
 	$(MAKE) -f CMakeFiles/pcd_read.dir/build.make CMakeFiles/pcd_read.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  12
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  14
 	@echo "Built target pcd_read"
 .PHONY : CMakeFiles/pcd_read.dir/all
 
@@ -1240,13 +1310,48 @@ clean: CMakeFiles/pcl_ros_gencfg.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/pcltocv.dir
+
+# All Build rule for target.
+CMakeFiles/pcltocv.dir/all:
+	$(MAKE) -f CMakeFiles/pcltocv.dir/build.make CMakeFiles/pcltocv.dir/depend
+	$(MAKE) -f CMakeFiles/pcltocv.dir/build.make CMakeFiles/pcltocv.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  15
+	@echo "Built target pcltocv"
+.PHONY : CMakeFiles/pcltocv.dir/all
+
+# Include target in all.
+all: CMakeFiles/pcltocv.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/pcltocv.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pancho/pcl_sample_ws/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/pcltocv.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pancho/pcl_sample_ws/build/CMakeFiles 0
+.PHONY : CMakeFiles/pcltocv.dir/rule
+
+# Convenience name for target.
+pcltocv: CMakeFiles/pcltocv.dir/rule
+.PHONY : pcltocv
+
+# clean rule for target.
+CMakeFiles/pcltocv.dir/clean:
+	$(MAKE) -f CMakeFiles/pcltocv.dir/build.make CMakeFiles/pcltocv.dir/clean
+.PHONY : CMakeFiles/pcltocv.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/pcltocv.dir/clean
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/range_image_creation.dir
 
 # All Build rule for target.
 CMakeFiles/range_image_creation.dir/all:
 	$(MAKE) -f CMakeFiles/range_image_creation.dir/build.make CMakeFiles/range_image_creation.dir/depend
 	$(MAKE) -f CMakeFiles/range_image_creation.dir/build.make CMakeFiles/range_image_creation.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  13
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  16
 	@echo "Built target range_image_creation"
 .PHONY : CMakeFiles/range_image_creation.dir/all
 
@@ -1281,7 +1386,7 @@ clean: CMakeFiles/range_image_creation.dir/clean
 CMakeFiles/range_image_visualization.dir/all:
 	$(MAKE) -f CMakeFiles/range_image_visualization.dir/build.make CMakeFiles/range_image_visualization.dir/depend
 	$(MAKE) -f CMakeFiles/range_image_visualization.dir/build.make CMakeFiles/range_image_visualization.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  14
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  17
 	@echo "Built target range_image_visualization"
 .PHONY : CMakeFiles/range_image_visualization.dir/all
 
@@ -1310,13 +1415,48 @@ clean: CMakeFiles/range_image_visualization.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/region_growing_rgb_segmentation.dir
+
+# All Build rule for target.
+CMakeFiles/region_growing_rgb_segmentation.dir/all:
+	$(MAKE) -f CMakeFiles/region_growing_rgb_segmentation.dir/build.make CMakeFiles/region_growing_rgb_segmentation.dir/depend
+	$(MAKE) -f CMakeFiles/region_growing_rgb_segmentation.dir/build.make CMakeFiles/region_growing_rgb_segmentation.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  18
+	@echo "Built target region_growing_rgb_segmentation"
+.PHONY : CMakeFiles/region_growing_rgb_segmentation.dir/all
+
+# Include target in all.
+all: CMakeFiles/region_growing_rgb_segmentation.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/region_growing_rgb_segmentation.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pancho/pcl_sample_ws/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/region_growing_rgb_segmentation.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/pancho/pcl_sample_ws/build/CMakeFiles 0
+.PHONY : CMakeFiles/region_growing_rgb_segmentation.dir/rule
+
+# Convenience name for target.
+region_growing_rgb_segmentation: CMakeFiles/region_growing_rgb_segmentation.dir/rule
+.PHONY : region_growing_rgb_segmentation
+
+# clean rule for target.
+CMakeFiles/region_growing_rgb_segmentation.dir/clean:
+	$(MAKE) -f CMakeFiles/region_growing_rgb_segmentation.dir/build.make CMakeFiles/region_growing_rgb_segmentation.dir/clean
+.PHONY : CMakeFiles/region_growing_rgb_segmentation.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/region_growing_rgb_segmentation.dir/clean
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/remove_outliers.dir
 
 # All Build rule for target.
 CMakeFiles/remove_outliers.dir/all:
 	$(MAKE) -f CMakeFiles/remove_outliers.dir/build.make CMakeFiles/remove_outliers.dir/depend
 	$(MAKE) -f CMakeFiles/remove_outliers.dir/build.make CMakeFiles/remove_outliers.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  15
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  19
 	@echo "Built target remove_outliers"
 .PHONY : CMakeFiles/remove_outliers.dir/all
 
@@ -1661,7 +1801,7 @@ clean: CMakeFiles/sensor_msgs_generate_messages_py.dir/clean
 CMakeFiles/statistical_removal.dir/all:
 	$(MAKE) -f CMakeFiles/statistical_removal.dir/build.make CMakeFiles/statistical_removal.dir/depend
 	$(MAKE) -f CMakeFiles/statistical_removal.dir/build.make CMakeFiles/statistical_removal.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  16
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  20
 	@echo "Built target statistical_removal"
 .PHONY : CMakeFiles/statistical_removal.dir/all
 
@@ -1789,7 +1929,7 @@ clean: CMakeFiles/std_msgs_generate_messages_py.dir/clean
 CMakeFiles/test_include.dir/all:
 	$(MAKE) -f CMakeFiles/test_include.dir/build.make CMakeFiles/test_include.dir/depend
 	$(MAKE) -f CMakeFiles/test_include.dir/build.make CMakeFiles/test_include.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  17
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  21
 	@echo "Built target test_include"
 .PHONY : CMakeFiles/test_include.dir/all
 
@@ -2134,7 +2274,7 @@ clean: CMakeFiles/topic_tools_generate_messages_py.dir/clean
 CMakeFiles/voxel_grid.dir/all:
 	$(MAKE) -f CMakeFiles/voxel_grid.dir/build.make CMakeFiles/voxel_grid.dir/depend
 	$(MAKE) -f CMakeFiles/voxel_grid.dir/build.make CMakeFiles/voxel_grid.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  18
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  22
 	@echo "Built target voxel_grid"
 .PHONY : CMakeFiles/voxel_grid.dir/all
 
@@ -2185,7 +2325,7 @@ gtest/preinstall:
 gtest/CMakeFiles/gtest.dir/all:
 	$(MAKE) -f gtest/CMakeFiles/gtest.dir/build.make gtest/CMakeFiles/gtest.dir/depend
 	$(MAKE) -f gtest/CMakeFiles/gtest.dir/build.make gtest/CMakeFiles/gtest.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  5
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  7
 	@echo "Built target gtest"
 .PHONY : gtest/CMakeFiles/gtest.dir/all
 
@@ -2216,7 +2356,7 @@ clean: gtest/CMakeFiles/gtest.dir/clean
 gtest/CMakeFiles/gtest_main.dir/all: gtest/CMakeFiles/gtest.dir/all
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/depend
 	$(MAKE) -f gtest/CMakeFiles/gtest_main.dir/build.make gtest/CMakeFiles/gtest_main.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  6
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/pancho/pcl_sample_ws/build/CMakeFiles  8
 	@echo "Built target gtest_main"
 .PHONY : gtest/CMakeFiles/gtest_main.dir/all
 
